@@ -33,7 +33,9 @@ jobs:
       - name: Export APK
         run: |
           mkdir -p build
-          godot --headless --export-debug "Android" build/realm.apk
+          ls /usr/lib/android-sdk /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools || true
+          godot --headless --verbose --import || true
+          godot --headless --verbose --export-debug "Android" build/realm.apk
       - uses: actions/upload-artifact@v4
         with:
           name: realm-apk
