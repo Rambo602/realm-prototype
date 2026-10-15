@@ -33,6 +33,12 @@ jobs:
       - name: Export APK
         run: |
           mkdir -p build
+          SM=$(find / -name sdkmanager -type f 2>/dev/null | head -1)
+          echo "SDKMANAGER=$SM"
+          ls /usr/lib/android-sdk/build-tools
+          yes | $SM --sdk_root=/usr/lib/android-sdk --licenses > /dev/null || true
+          $SM --sdk_root=/usr/lib/android-sdk "platforms;android-34" "build-tools;34.0.0" || true
+          ls /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools
           ls /usr/lib/android-sdk /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools || true
           godot --headless --verbose --import || true
           godot --headless --verbose --export-debug "Android" build/realm.apk
