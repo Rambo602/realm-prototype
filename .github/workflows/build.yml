@@ -41,6 +41,10 @@ jobs:
           ls /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools
           ls /usr/lib/android-sdk /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools || true
           godot --headless --verbose --import || true
+          echo "=== SETTINGS FILE"
+          grep -i -E "android|java|keystore" $HOME/.config/godot/editor_settings-4.tres || echo "NO ANDROID SETTINGS"
+          echo "=== TEMPLATES"
+          ls -la $HOME/.local/share/godot/export_templates/4.3.stable | head
           godot --headless --verbose --export-debug "Android" build/realm.apk
       - uses: actions/upload-artifact@v4
         with:
