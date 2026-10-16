@@ -40,6 +40,8 @@ jobs:
           $SM --sdk_root=/usr/lib/android-sdk "platforms;android-34" "build-tools;34.0.0" || true
           ls /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools
           ls /usr/lib/android-sdk /usr/lib/android-sdk/platforms /usr/lib/android-sdk/build-tools || true
+          ln -sfn /usr/lib/android-sdk/cmdline-tools/cmdline-tools /usr/lib/android-sdk/cmdline-tools/latest
+          ls /usr/lib/android-sdk/cmdline-tools
           godot --headless --verbose --import || true
           echo "=== SETTINGS FILE"
           grep -i -E "android|java|keystore" $HOME/.config/godot/editor_settings-4.tres || echo "NO ANDROID SETTINGS"
